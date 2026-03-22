@@ -1,0 +1,7 @@
+.git/
+.wrangler/
+.gitignore
+.DS_Store
+wrangler.jsonc
+.env*
+.dev.vars*
