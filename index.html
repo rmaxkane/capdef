@@ -31,6 +31,7 @@
       color: var(--text);
       background: var(--bg);
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     /* ─── HEADER ───────────────────────────────────────── */
@@ -423,6 +424,14 @@
       text-transform: uppercase;
     }
 
+    .bio-sidebar-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      text-align: center;
+    }
+
     .bio-body {
       padding: 56px 64px;
       border-top: 3px solid var(--gold);
@@ -585,114 +594,140 @@
       footer { padding: 22px 32px; }
     }
 
-    /* Mobile-large: ≤768px */
+    /* Mobile: ≤768px */
     @media (max-width: 768px) {
-      /* Header: stack logo + contact vertically */
+      /* Header: stay as row, shrink logo to fit */
       .header-inner {
-        padding: 14px 20px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+        padding: 12px 20px;
+        align-items: center;
+        gap: 12px;
       }
-      .header-contact { text-align: left; }
-
-      /* Logo: tighten spacing */
-      .logo-cdf { font-size: 40px; }
-      .logo-firm { font-size: 14px; letter-spacing: 2px; }
+      .logo { gap: 12px; }
+      .logo-cdf { font-size: 38px; }
+      .logo-firm { font-size: 13px; letter-spacing: 2px; }
+      .logo-sub { font-size: 9px; letter-spacing: 1.5px; }
+      .header-contact { text-align: right; flex-shrink: 0; }
 
       /* Hero */
-      .hero { padding: 64px 20px 56px; }
-      .hero h1 { font-size: 38px; }
+      .hero { padding: 60px 24px 52px; }
+      .hero h1 { font-size: clamp(32px, 6.5vw, 48px); }
 
-      /* Gallery: 3 columns, shorter */
-      .gallery {
-        grid-template-columns: repeat(3, 1fr);
-        height: 200px;
-      }
-      /* Hide last 2 gallery items to avoid overflow */
+      /* Gallery: 3 columns */
+      .gallery { grid-template-columns: repeat(3, 1fr); height: 200px; }
       .gallery figure:nth-child(4),
       .gallery figure:nth-child(5) { display: none; }
 
       /* Stats: 2×2 grid */
-      .stats-bar { padding: 24px 20px; }
-      .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 20px 0; }
-      .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 0 12px 20px; }
+      .stats-bar { padding: 0 20px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 0; }
+      .stat {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        padding: 24px 16px;
+      }
       .stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.08); }
-      .stat:nth-child(3), .stat:nth-child(4) { border-bottom: none; padding-bottom: 0; padding-top: 20px; }
+      .stat:nth-child(3),
+      .stat:nth-child(4) { border-bottom: none; }
       .stat-val { font-size: 32px; }
 
-      /* Main */
-      main { padding: 40px 20px 32px; gap: 28px; }
+      /* Main: tighter padding to maximize text width */
+      main { padding: 32px 16px 28px; gap: 24px; }
 
-      /* Strategy card: reduce padding */
-      .card-body { padding: 36px 28px; }
-      .card-body h2 { font-size: 28px; }
-      .card-body p { font-size: 15px; }
+      /* Strategy card */
+      .card-body { padding: 32px 28px; }
+      .card-body h2 { font-size: 28px; margin-bottom: 20px; }
+      .card-body p { font-size: 15px; line-height: 1.85; }
 
-      /* Bio card: stack sidebar on top */
+      /* Bio card: sidebar becomes a horizontal identity bar */
       .bio-card { grid-template-columns: 1fr; }
-      .bio-sidebar { padding: 36px 28px; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 12px 24px; text-align: center; }
-      .bio-monogram { margin-bottom: 0; }
+      .bio-sidebar {
+        padding: 24px 28px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 18px;
+        text-align: left;
+      }
+      .bio-sidebar-info { align-items: flex-start; text-align: left; }
+      .bio-monogram {
+        width: 64px; height: 64px;
+        font-size: 22px;
+        margin-bottom: 0;
+        flex-shrink: 0;
+      }
+      .bio-sidebar h3 { font-size: 18px; margin-bottom: 2px; }
+      .bio-cred { font-size: 9px; letter-spacing: 2.5px; }
       .bio-sidebar-rule { display: none; }
-      .bio-role { width: 100%; margin-top: -4px; }
-      .bio-body { padding: 36px 28px; }
-      .bio-body p { font-size: 15px; }
+      .bio-role { margin-top: 4px; opacity: 0.65; }
+      .bio-body { padding: 32px 28px; }
+      .bio-body p { font-size: 15px; line-height: 1.85; }
 
       /* Contact: stack columns */
       .contact-section { padding: 56px 20px; }
-      .contact-inner { grid-template-columns: 1fr; gap: 36px; }
+      .contact-inner { grid-template-columns: 1fr; gap: 32px; }
       .contact-left h2 { font-size: 32px; }
+      .contact-left p { max-width: 100%; }
       .contact-card { padding: 32px 28px; }
 
-      footer { padding: 20px; }
+      footer { padding: 20px 16px; }
     }
 
     /* Mobile-small: ≤480px */
     @media (max-width: 480px) {
-      .logo-cdf { font-size: 34px; }
-      .logo-divider { height: 30px; }
-      .logo-firm { font-size: 12px; letter-spacing: 1.5px; }
-      .logo-sub { font-size: 9px; }
+      /* Header: compress logo further */
+      .header-inner { padding: 10px 16px; }
+      .logo { gap: 10px; }
+      .logo-cdf { font-size: 32px; }
+      .logo-divider { height: 28px; }
+      .logo-firm { font-size: 11px; letter-spacing: 1.5px; }
+      .logo-sub { display: none; }
+      .header-tel { font-size: 13px; }
+      .header-email { font-size: 11px; }
 
-      .hero { padding: 48px 16px 44px; }
-      .hero h1 { font-size: clamp(28px, 8vw, 38px); }
+      /* Hero */
+      .hero { padding: 44px 16px 40px; }
+      .hero h1 { font-size: clamp(26px, 7.5vw, 34px); line-height: 1.15; }
       .hero-eyebrow { font-size: 9px; letter-spacing: 2.5px; }
 
-      /* Gallery: 2 columns, hide 3rd */
-      .gallery {
-        grid-template-columns: repeat(2, 1fr);
-        height: 160px;
-      }
+      /* Gallery: 2 columns */
+      .gallery { grid-template-columns: repeat(2, 1fr); height: 160px; }
       .gallery figure:nth-child(3),
       .gallery figure:nth-child(4),
       .gallery figure:nth-child(5) { display: none; }
 
-      .stats-inner { grid-template-columns: 1fr 1fr; }
+      /* Stats */
+      .stat { padding: 20px 12px; }
       .stat-val { font-size: 28px; }
       .stat-lbl { font-size: 9px; }
 
-      main { padding: 28px 16px 24px; }
+      /* Main */
+      main { padding: 24px 14px 20px; gap: 20px; }
 
-      .card-body { padding: 28px 20px; }
+      /* Strategy card */
+      .card-body { padding: 24px 20px; }
       .card-body h2 { font-size: 24px; }
       .card-body p { font-size: 14.5px; line-height: 1.8; }
 
-      .bio-sidebar { padding: 28px 20px; }
-      .bio-body { padding: 28px 20px; }
+      /* Bio */
+      .bio-sidebar { padding: 20px 20px; gap: 14px; }
+      .bio-monogram { width: 52px; height: 52px; font-size: 18px; box-shadow: 0 0 0 5px rgba(200,169,81,0.05); }
+      .bio-sidebar h3 { font-size: 16px; }
+      .bio-body { padding: 24px 20px; }
       .bio-body p { font-size: 14.5px; line-height: 1.8; }
 
-      .contact-section { padding: 44px 16px; }
+      /* Contact */
+      .contact-section { padding: 44px 14px; }
       .contact-left h2 { font-size: 26px; }
       .contact-card { padding: 24px 20px; }
-      .c-name { font-size: 22px; }
+      .c-name { font-size: 21px; }
+      .contact-section::after { font-size: 120px; opacity: 0.02; }
 
-      .contact-section::after { font-size: 140px; opacity: 0.025; }
-
-      footer { padding: 18px 16px; }
+      footer { padding: 16px 14px; }
     }
   </style>
   
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
@@ -811,10 +846,12 @@
     <section class="bio-card">
       <div class="bio-sidebar">
         <div class="bio-monogram">RK</div>
-        <h3>Richard Kane</h3>
-        <div class="bio-cred">CFA</div>
-        <div class="bio-sidebar-rule"></div>
-        <div class="bio-role">Founding Member</div>
+        <div class="bio-sidebar-info">
+          <h3>Richard Kane</h3>
+          <div class="bio-cred">CFA</div>
+          <div class="bio-sidebar-rule"></div>
+          <div class="bio-role">Founding Member</div>
+        </div>
       </div>
       <div class="bio-body">
         <div class="eyebrow">Leadership</div>
@@ -864,10 +901,6 @@
           <div class="c-item">
             <div class="c-icon">✉</div>
             <a href="mailto:rkane@capdef.com">rkane@capdef.com</a>
-          </div>
-          <div class="c-item">
-            <div class="c-icon">⊕</div>
-            <a href="http://www.capitaldefensefunds.com" target="_blank" rel="noopener">www.capitaldefensefunds.com</a>
           </div>
         </div>
       </div>
